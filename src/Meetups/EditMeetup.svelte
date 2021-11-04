@@ -64,7 +64,7 @@
     rows="3"
     on:input={(event) => (description = event.target.value)}
   />
-  <Button type="submit" caption="Submit" />
+  <Button type="submit">Save</Button>
 </form>
 
 <style>
