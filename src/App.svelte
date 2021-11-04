@@ -1,9 +1,7 @@
 <script>
-
+import Header from './UI/Header.svelte'
 </script>
 
-<style>
 
-</style>
+<Header />
 
-<h1>Time for a project!</h1>
