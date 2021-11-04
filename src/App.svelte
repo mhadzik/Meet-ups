@@ -65,28 +65,28 @@
       label="Subtitle"
       value={subtitle}
       type="text"
-      on:input={(event) => (title = event.target.value)}
+      on:input={(event) => (subtitle = event.target.value)}
     />
     <TextInput
       id="address"
       label="Address"
       value={address}
       type="text"
-      on:input={(event) => (title = event.target.value)}
+      on:input={(event) => (address = event.target.value)}
     />
     <TextInput
       id="imageUrl"
       label="Image URL"
       value={imageUrl}
       type="text"
-      on:input={(event) => (title = event.target.value)}
+      on:input={(event) => (imageUrl = event.target.value)}
     />
     <TextInput
       id="email"
       label="Email"
       value={email}
       type="email"
-      on:input={(event) => (title = event.target.value)}
+      on:input={(event) => (email = event.target.value)}
     />
     <TextInput
       id="description"
@@ -94,7 +94,7 @@
       value={description}
       controlType="textarea"
       rows="3"
-      on:input={(event) => (title = event.target.value)}
+      on:input={(event) => (description = event.target.value)}
     />
     <Button type="submit" caption="Submit" />
   </form>

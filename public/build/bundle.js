@@ -1806,6 +1806,21 @@ var app = (function () {
     			const textinput0_changes = {};
     			if (dirty & /*title*/ 2) textinput0_changes.value = /*title*/ ctx[1];
     			textinput0.$set(textinput0_changes);
+    			const textinput1_changes = {};
+    			if (dirty & /*subtitle*/ 4) textinput1_changes.value = /*subtitle*/ ctx[2];
+    			textinput1.$set(textinput1_changes);
+    			const textinput2_changes = {};
+    			if (dirty & /*address*/ 8) textinput2_changes.value = /*address*/ ctx[3];
+    			textinput2.$set(textinput2_changes);
+    			const textinput3_changes = {};
+    			if (dirty & /*imageUrl*/ 32) textinput3_changes.value = /*imageUrl*/ ctx[5];
+    			textinput3.$set(textinput3_changes);
+    			const textinput4_changes = {};
+    			if (dirty & /*email*/ 16) textinput4_changes.value = /*email*/ ctx[4];
+    			textinput4.$set(textinput4_changes);
+    			const textinput5_changes = {};
+    			if (dirty & /*description*/ 64) textinput5_changes.value = /*description*/ ctx[6];
+    			textinput5.$set(textinput5_changes);
     			const meetupgrid_changes = {};
     			if (dirty & /*meetups*/ 1) meetupgrid_changes.meetups = /*meetups*/ ctx[0];
     			meetupgrid.$set(meetupgrid_changes);
@@ -1916,11 +1931,11 @@ var app = (function () {
     	});
 
     	const input_handler = event => $$invalidate(1, title = event.target.value);
-    	const input_handler_1 = event => $$invalidate(1, title = event.target.value);
-    	const input_handler_2 = event => $$invalidate(1, title = event.target.value);
-    	const input_handler_3 = event => $$invalidate(1, title = event.target.value);
-    	const input_handler_4 = event => $$invalidate(1, title = event.target.value);
-    	const input_handler_5 = event => $$invalidate(1, title = event.target.value);
+    	const input_handler_1 = event => $$invalidate(2, subtitle = event.target.value);
+    	const input_handler_2 = event => $$invalidate(3, address = event.target.value);
+    	const input_handler_3 = event => $$invalidate(5, imageUrl = event.target.value);
+    	const input_handler_4 = event => $$invalidate(4, email = event.target.value);
+    	const input_handler_5 = event => $$invalidate(6, description = event.target.value);
 
     	$$self.$capture_state = () => ({
     		Header,
