@@ -2,6 +2,7 @@
   import Header from "./UI/Header.svelte";
   import MeetupGrid from "./Meetups/MeetupGrid.svelte";
   import TextInput from "./UI/TextInput.svelte";
+  import Button from "./UI/Button.svelte";
   let meetups = [
     {
       id: 1,
@@ -95,7 +96,7 @@
       rows="3"
       on:input={(event) => (title = event.target.value)}
     />
-    <button type="submit">Save</button>
+    <Button type="submit" caption="Submit" />
   </form>
   <MeetupGrid {meetups} />
 </main>
@@ -105,8 +106,8 @@
     margin-top: 5rem;
   }
   form {
-      width: 30rem;
-      max-width: 90%;
-      margin: auto;
+    width: 30rem;
+    max-width: 90%;
+    margin: auto;
   }
 </style>
