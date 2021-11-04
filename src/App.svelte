@@ -14,6 +14,7 @@
         "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg",
       address: "27th Nerd Road, 32523 New York",
       contantEmail: "code@test.com",
+      isFavorite: false,
     },
     {
       id: 2,
@@ -25,6 +26,7 @@
         "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
       address: "27th Nerd Road, 32523 New York",
       contantEmail: "swim@test.com",
+      isFavorite: false,
     },
   ];
 
@@ -47,6 +49,21 @@
     };
 
     meetups = [...meetups, newMeetup];
+  };
+
+  const toggleFavorite = (event) => {
+    const id = event.detail;
+    const updatedMeetup = {
+      ...meetups.find((m) => m.id === id),
+    };
+    updatedMeetup.isFavorite = !updatedMeetup.isFavorite;
+    const meetupIndex = meetups.findIndex((m) => m.id === id);
+
+    const updatedMeetups = [...meetups];
+
+    updatedMeetups[meetupIndex] = updatedMeetup;
+
+    meetups = updatedMeetups;
   };
 </script>
 
@@ -94,7 +111,7 @@
     />
     <Button type="submit" caption="Submit" />
   </form>
-  <MeetupGrid {meetups} />
+  <MeetupGrid {meetups} on:togglefavorite={toggleFavorite} />
 </main>
 
 <style>

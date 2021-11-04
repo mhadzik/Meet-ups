@@ -8,7 +8,7 @@
 {#if href}
   <a class={mode} {href}>{caption}</a>
 {:else}
-  <button class={mode} {type}>{caption}</button>
+  <button class={mode} {type} on:click>{caption}</button>
 {/if}
 
 <style>
