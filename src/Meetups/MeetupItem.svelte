@@ -1,5 +1,6 @@
 <script>
   import Button from "../UI/Button.svelte";
+  import Badge from "../UI/Badge.svelte";
   import { createEventDispatcher } from "svelte";
 
   export let id;
@@ -16,7 +17,12 @@
 
 <article>
   <header>
-    <h1>{title}</h1>
+    <h1>
+      {title}
+      {#if isFav}
+        <Badge>FAVORITE</Badge>
+      {/if}
+    </h1>
     <h2>{subtitle}</h2>
     <p>{address}</p>
   </header>
@@ -31,6 +37,7 @@
     <Button type="button" caption="Show Details" />
     <Button
       mode="outline"
+      color={isFav ? null : "success"}
       type="button"
       caption={isFav ? "Unfavorite" : "Favorite"}
       on:click={() => {
