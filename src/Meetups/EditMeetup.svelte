@@ -12,14 +12,6 @@
   let imageUrl = "";
   let description = "";
 
-  let formIsValid = false;
-  let titleValid = false;
-  let subtitleValid = false;
-  let addressValid = false;
-  let emailValid = false;
-  let imageUrlValid = false;
-  let descriptionValid = false;
-
   const dispatch = createEventDispatcher();
 
   $: titleValid = !isEmpty(title);
