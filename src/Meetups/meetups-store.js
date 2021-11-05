@@ -9,7 +9,7 @@ const meetups = writable([
       "lorem loremloremloremloremlorem loremlorem loremlorem loremloremlorem loremloremlorem",
     address: "27th Nerd Road, 32523 New York",
     imageUrl: "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg",
-    contantEmail: "code@test.com",
+    contactEmail: "code@test.com",
     isFavorite: false,
   },
   {
@@ -21,7 +21,7 @@ const meetups = writable([
     address: "27th Nerd Road, 32523 New York",
     imageUrl:
       "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-    contantEmail: "swim@test.com",
+    contactEmail: "swim@test.com",
     isFavorite: false,
   },
 ]);
@@ -41,6 +41,15 @@ const customMeetupsStore = {
       };
       updatedMeetup.isFavorite = !updatedMeetup.isFavorite;
       const meetupIndex = items.findIndex((m) => m.id === id);
+      const updatedMeetups = [...items];
+      updatedMeetups[meetupIndex] = updatedMeetup;
+      return updatedMeetups;
+    });
+  },
+  updateMeetup: (id, meetupData) => {
+    meetups.update((items) => {
+      const meetupIndex = items.findIndex((i) => i.id === id);
+      const updatedMeetup = { ...items[meetupIndex], ...meetupData };
       const updatedMeetups = [...items];
       updatedMeetups[meetupIndex] = updatedMeetup;
       return updatedMeetups;
