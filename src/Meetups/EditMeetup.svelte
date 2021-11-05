@@ -4,6 +4,7 @@
   import { createEventDispatcher } from "svelte";
   import Modal from "../UI/Modal.svelte";
   import { isEmpty, isValidEmail } from "../utility/validation";
+  import meetups from "./meetups-store";
 
   let title = "";
   let subtitle = "";
@@ -29,14 +30,17 @@
     descriptionValid;
 
   const submitForm = () => {
-    dispatch("save", {
+    const meetupData = {
       title: title,
       subtitle: subtitle,
-      address: address,
-      email: email,
-      imageUrl: imageUrl,
       description: description,
-    });
+      address: address,
+      imageUrl: imageUrl,
+      contactEmail: email,
+    };
+
+    meetups.addMeetup(meetupData);
+    dispatch("save");
   };
 
   const cancel = () => {

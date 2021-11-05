@@ -10,9 +10,9 @@
       id={meetup.id}
       title={meetup.title}
       subtitle={meetup.subtitle}
-      imageUrl={meetup.imageURL}
       description={meetup.description}
       address={meetup.address}
+      imageUrl={meetup.imageUrl}
       email={meetup.email}
       isFav={meetup.isFavorite}
       on:togglefavorite
