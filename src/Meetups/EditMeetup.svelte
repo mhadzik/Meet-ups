@@ -57,11 +57,14 @@
     };
 
     if (id) {
-      fetch(`https://meetus-d5682-default-rtdb.firebaseio.com/meetups/${id}.json`, {
-        method: "PATCH",
-        body: JSON.stringify(meetupData),
-        headers: { "Content-Type": "application/json" },
-      })
+      fetch(
+        `https://meetus-d5682-default-rtdb.firebaseio.com/meetups/${id}.json`,
+        {
+          method: "PATCH",
+          body: JSON.stringify(meetupData),
+          headers: { "Content-Type": "application/json" },
+        }
+      )
         .then((res) => {
           if (!res.ok) {
             throw new Error("Error!");
@@ -99,7 +102,19 @@
   };
 
   const deleteMeetup = () => {
-    meetups.removeMeetup(id);
+    fetch(
+      `https://meetus-d5682-default-rtdb.firebaseio.com/meetups/${id}.json`,
+      {
+        method: "DELETE",
+      }
+    )
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Error!");
+        }
+        meetups.removeMeetup(id);
+      })
+      .catch((err) => console.log(err));
     dispatch("save");
   };
 </script>

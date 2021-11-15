@@ -3612,7 +3612,7 @@ var app = (function () {
     const { Error: Error_1$1, console: console_1$1 } = globals;
     const file$3 = "src\\Meetups\\EditMeetup.svelte";
 
-    // (107:0) <Modal title="Edit Meetup Data" on:cancel>
+    // (122:0) <Modal title="Edit Meetup Data" on:cancel>
     function create_default_slot_3(ctx) {
     	let form;
     	let textinput0;
@@ -3726,7 +3726,7 @@ var app = (function () {
     			t4 = space();
     			create_component(textinput5.$$.fragment);
     			attr_dev(form, "class", "svelte-no1xoc");
-    			add_location(form, file$3, 107, 2, 2883);
+    			add_location(form, file$3, 122, 2, 3213);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
@@ -3810,14 +3810,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_3.name,
     		type: "slot",
-    		source: "(107:0) <Modal title=\\\"Edit Meetup Data\\\" on:cancel>",
+    		source: "(122:0) <Modal title=\\\"Edit Meetup Data\\\" on:cancel>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (162:4) <Button type="button" mode="outline" on:click={cancel}>
+    // (177:4) <Button type="button" mode="outline" on:click={cancel}>
     function create_default_slot_2(ctx) {
     	let t;
 
@@ -3837,14 +3837,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(162:4) <Button type=\\\"button\\\" mode=\\\"outline\\\" on:click={cancel}>",
+    		source: "(177:4) <Button type=\\\"button\\\" mode=\\\"outline\\\" on:click={cancel}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (164:4) <Button type="button" on:click={submitForm} disabled={!formIsValid}        >
+    // (179:4) <Button type="button" on:click={submitForm} disabled={!formIsValid}        >
     function create_default_slot_1$1(ctx) {
     	let t;
 
@@ -3864,14 +3864,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$1.name,
     		type: "slot",
-    		source: "(164:4) <Button type=\\\"button\\\" on:click={submitForm} disabled={!formIsValid}        >",
+    		source: "(179:4) <Button type=\\\"button\\\" on:click={submitForm} disabled={!formIsValid}        >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (167:4) {#if id}
+    // (182:4) {#if id}
     function create_if_block$1(ctx) {
     	let button;
     	let current;
@@ -3922,14 +3922,14 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(167:4) {#if id}",
+    		source: "(182:4) {#if id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (168:6) <Button type="button" on:click={deleteMeetup}>
+    // (183:6) <Button type="button" on:click={deleteMeetup}>
     function create_default_slot$1(ctx) {
     	let t;
 
@@ -3949,14 +3949,14 @@ var app = (function () {
     		block,
     		id: create_default_slot$1.name,
     		type: "slot",
-    		source: "(168:6) <Button type=\\\"button\\\" on:click={deleteMeetup}>",
+    		source: "(183:6) <Button type=\\\"button\\\" on:click={deleteMeetup}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (161:2) 
+    // (176:2) 
     function create_footer_slot(ctx) {
     	let div;
     	let button0;
@@ -3999,7 +3999,7 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
     			attr_dev(div, "slot", "footer");
-    			add_location(div, file$3, 160, 2, 4432);
+    			add_location(div, file$3, 175, 2, 4762);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -4075,7 +4075,7 @@ var app = (function () {
     		block,
     		id: create_footer_slot.name,
     		type: "slot",
-    		source: "(161:2) ",
+    		source: "(176:2) ",
     		ctx
     	});
 
@@ -4229,7 +4229,14 @@ var app = (function () {
     	};
 
     	const deleteMeetup = () => {
-    		customMeetupsStore.removeMeetup(id);
+    		fetch(`https://meetus-d5682-default-rtdb.firebaseio.com/meetups/${id}.json`, { method: "DELETE" }).then(res => {
+    			if (!res.ok) {
+    				throw new Error("Error!");
+    			}
+
+    			customMeetupsStore.removeMeetup(id);
+    		}).catch(err => console.log(err));
+
     		dispatch("save");
     	};
 
