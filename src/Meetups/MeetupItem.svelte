@@ -2,7 +2,7 @@
   import Button from "../UI/Button.svelte";
   import Badge from "../UI/Badge.svelte";
   import meetups from "./meetups-store";
- 
+
   import { createEventDispatcher } from "svelte";
   export let id;
   export let title;
@@ -16,7 +16,21 @@
   const dispatch = createEventDispatcher();
 
   const toggleFavorite = () => {
-    meetups.toggleFavorite(id);
+    fetch(
+      `https://meetus-d5682-default-rtdb.firebaseio.com/meetups/${id}.json`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ isFavorite: !isFav }),
+        headers: { "Content-Type": "application/json" },
+      }
+    )
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Error!");
+        }
+        meetups.toggleFavorite(id);
+      })
+      .catch((err) => console.log(err));
   };
 </script>
 
