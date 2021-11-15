@@ -2,7 +2,6 @@
   import Header from "./UI/Header.svelte";
   import MeetupGrid from "./Meetups/MeetupGrid.svelte";
   import EditMeetup from "./Meetups/EditMeetup.svelte";
-  import Button from "./UI/Button.svelte";
   import meetups from "./Meetups/meetups-store";
   import MeetupDetail from "./Meetups/MeetupDetail.svelte";
 
@@ -35,6 +34,25 @@
     editMode = "edit";
     editedId = event.detail;
   };
+
+  fetch("https://meetus-d5682-default-rtdb.firebaseio.com/meetups.json")
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Error!");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      const loadedMeetups = [];
+      for (const key in data) {
+        loadedMeetups.push({
+          ...data[key],
+          id: key,
+        });
+      }
+      meetups.setMeetups(loadedMeetups);
+    })
+    .catch((err) => console.log(err));
 </script>
 
 <Header />
