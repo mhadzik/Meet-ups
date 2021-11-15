@@ -27,6 +27,9 @@
     }}>New Meetup</Button
   >
 </section>
+{#if filteredMeetups.length === 0}
+  <p id="no-meetups">No meetups found :(</p>
+{/if}
 <section id="meetups">
   {#each filteredMeetups as meetup (meetup.id)}
     <div transition:scale animate:flip={{ duration: 300 }}>
@@ -48,6 +51,9 @@
 </section>
 
 <style>
+  #no-meetups {
+    margin: 1rem;
+  }
   #meetups {
     widows: 100%;
     display: grid;
