@@ -59,7 +59,25 @@
     if (id) {
       meetups.updateMeetup(id, meetupData);
     } else {
-      meetups.addMeetup(meetupData);
+      fetch("https://meetus-d5682-default-rtdb.firebaseio.com/meetups.json", {
+        method: "POST",
+        body: JSON.stringify({ ...meetupData, isFavorite: false }),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Error!");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          meetups.addMeetup({
+            ...meetupData,
+            isFavorite: false,
+            id: data.name,
+          });
+        })
+        .catch((err) => console.log(err));
     }
 
     dispatch("save");

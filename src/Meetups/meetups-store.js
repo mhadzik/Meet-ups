@@ -29,7 +29,7 @@ const meetups = writable([
 const customMeetupsStore = {
   subscribe: meetups.subscribe,
   addMeetup: (meetupData) => {
-    const newMeetup = { ...meetupData, id: Math.random(), isFavorite: false };
+    const newMeetup = { ...meetupData };
     meetups.update((items) => {
       return [newMeetup, ...items];
     });
@@ -56,10 +56,10 @@ const customMeetupsStore = {
     });
   },
   removeMeetup: (id) => {
-    meetups.update(items => {
-      return items.filter(i => i.id !== id)
-    })
-  }
+    meetups.update((items) => {
+      return items.filter((i) => i.id !== id);
+    });
+  },
 };
 
 export default customMeetupsStore;
