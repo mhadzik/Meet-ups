@@ -5,12 +5,14 @@
   import meetups from "./Meetups/meetups-store";
   import MeetupDetail from "./Meetups/MeetupDetail.svelte";
   import Spinner from "./UI/Spinner.svelte";
+  import Error from "./UI/Error.svelte";
 
   let editMode = null;
   let page = "overview";
   let pageData = {};
   let editedId = null;
   let isLoading = true;
+  let error;
 
   const savedMeetup = (event) => {
     editMode = null;
@@ -56,11 +58,19 @@
       meetups.setMeetups(loadedMeetups.reverse());
     })
     .catch((err) => {
+      error = err;
       isLoading = false;
       console.log(err);
     });
+
+  const clearError = () => {
+    error = null;
+  };
 </script>
 
+{#if error}
+  <Error message={error.message} on:cancel={clearError} />
+{/if}
 <Header />
 <main>
   {#if page === "overview"}

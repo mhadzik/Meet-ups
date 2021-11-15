@@ -2,6 +2,7 @@
   import Button from "../UI/Button.svelte";
   import Badge from "../UI/Badge.svelte";
   import meetups from "./meetups-store";
+  import Spinner from "../UI/Spinner.svelte";
 
   import { createEventDispatcher } from "svelte";
   export let id;
@@ -13,9 +14,12 @@
   export let email;
   export let isFav;
 
+  let isLoading = false;
+
   const dispatch = createEventDispatcher();
 
   const toggleFavorite = () => {
+    isLoading = true;
     fetch(
       `https://meetus-d5682-default-rtdb.firebaseio.com/meetups/${id}.json`,
       {
@@ -29,8 +33,12 @@
           throw new Error("Error!");
         }
         meetups.toggleFavorite(id);
+        isLoading = false;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        isLoading = false;
+        console.log(err);
+      });
   };
 </script>
 
@@ -55,15 +63,20 @@
     <Button type="button" mode="outline" on:click={() => dispatch("edit", id)}
       >Edit</Button
     >
+
     <Button type="button" on:click={dispatch("showdetails", id)}
       >Show Details</Button
     >
-    <Button
-      mode="outline"
-      color={isFav ? null : "success"}
-      type="button"
-      on:click={toggleFavorite}>{isFav ? "Unfavorite" : "Favorite"}</Button
-    >
+    {#if isLoading}
+      <Spinner />
+    {:else}
+      <Button
+        mode="outline"
+        color={isFav ? null : "success"}
+        type="button"
+        on:click={toggleFavorite}>{isFav ? "Unfavorite" : "Favorite"}</Button
+      >
+    {/if}
   </footer>
 </article>
 
