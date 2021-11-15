@@ -3600,7 +3600,7 @@ var app = (function () {
     const { Error: Error_1$1, console: console_1$1 } = globals;
     const file$3 = "src\\Meetups\\EditMeetup.svelte";
 
-    // (96:0) <Modal title="Edit Meetup Data" on:cancel>
+    // (107:0) <Modal title="Edit Meetup Data" on:cancel>
     function create_default_slot_3(ctx) {
     	let form;
     	let textinput0;
@@ -3714,7 +3714,7 @@ var app = (function () {
     			t4 = space();
     			create_component(textinput5.$$.fragment);
     			attr_dev(form, "class", "svelte-no1xoc");
-    			add_location(form, file$3, 96, 2, 2495);
+    			add_location(form, file$3, 107, 2, 2883);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
@@ -3798,14 +3798,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_3.name,
     		type: "slot",
-    		source: "(96:0) <Modal title=\\\"Edit Meetup Data\\\" on:cancel>",
+    		source: "(107:0) <Modal title=\\\"Edit Meetup Data\\\" on:cancel>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (151:4) <Button type="button" mode="outline" on:click={cancel}>
+    // (162:4) <Button type="button" mode="outline" on:click={cancel}>
     function create_default_slot_2(ctx) {
     	let t;
 
@@ -3825,14 +3825,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(151:4) <Button type=\\\"button\\\" mode=\\\"outline\\\" on:click={cancel}>",
+    		source: "(162:4) <Button type=\\\"button\\\" mode=\\\"outline\\\" on:click={cancel}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (153:4) <Button type="button" on:click={submitForm} disabled={!formIsValid}        >
+    // (164:4) <Button type="button" on:click={submitForm} disabled={!formIsValid}        >
     function create_default_slot_1$1(ctx) {
     	let t;
 
@@ -3852,14 +3852,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$1.name,
     		type: "slot",
-    		source: "(153:4) <Button type=\\\"button\\\" on:click={submitForm} disabled={!formIsValid}        >",
+    		source: "(164:4) <Button type=\\\"button\\\" on:click={submitForm} disabled={!formIsValid}        >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (156:4) {#if id}
+    // (167:4) {#if id}
     function create_if_block$1(ctx) {
     	let button;
     	let current;
@@ -3910,14 +3910,14 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(156:4) {#if id}",
+    		source: "(167:4) {#if id}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (157:6) <Button type="button" on:click={deleteMeetup}>
+    // (168:6) <Button type="button" on:click={deleteMeetup}>
     function create_default_slot$1(ctx) {
     	let t;
 
@@ -3937,14 +3937,14 @@ var app = (function () {
     		block,
     		id: create_default_slot$1.name,
     		type: "slot",
-    		source: "(157:6) <Button type=\\\"button\\\" on:click={deleteMeetup}>",
+    		source: "(168:6) <Button type=\\\"button\\\" on:click={deleteMeetup}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (150:2) 
+    // (161:2) 
     function create_footer_slot(ctx) {
     	let div;
     	let button0;
@@ -3987,7 +3987,7 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
     			attr_dev(div, "slot", "footer");
-    			add_location(div, file$3, 149, 2, 4044);
+    			add_location(div, file$3, 160, 2, 4432);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -4063,7 +4063,7 @@ var app = (function () {
     		block,
     		id: create_footer_slot.name,
     		type: "slot",
-    		source: "(150:2) ",
+    		source: "(161:2) ",
     		ctx
     	});
 
@@ -4178,7 +4178,17 @@ var app = (function () {
     		};
 
     		if (id) {
-    			customMeetupsStore.updateMeetup(id, meetupData);
+    			fetch(`https://meetus-d5682-default-rtdb.firebaseio.com/meetups/${id}.json`, {
+    				method: "PATCH",
+    				body: JSON.stringify(meetupData),
+    				headers: { "Content-Type": "application/json" }
+    			}).then(res => {
+    				if (!res.ok) {
+    					throw new Error("Error!");
+    				}
+
+    				customMeetupsStore.updateMeetup(id, meetupData);
+    			}).catch(err => console.log(err));
     		} else {
     			fetch("https://meetus-d5682-default-rtdb.firebaseio.com/meetups.json", {
     				method: "POST",
